@@ -26,31 +26,21 @@ pub struct TicTacToe {
 
 impl TicTacToe {
     pub fn new(_size: usize) -> Self {
-        let mut _letters: Vec<char> = ('a'..='z').collect();
-        let uppercase: Vec<char> = ('A'..='Z').collect();
-        _letters.extend(uppercase);
-
-        let mut _line = String::new();
-        for _ in 0.._size-1 {
-            _line += "----"; 
-        } _line += "---"; 
+        let _letters: Vec<char> = [
+            ('a'..='z').collect::<Vec<char>>(), 
+            ('A'..='Z').collect::<Vec<char>>()
+        ].concat(); 
+        
+        let _line = "----".repeat(_size - 1) + "---"; 
+        let mut _board: Vec<Vec<Mark>> = vec![vec![Mark::Unmarked; _size]; _size];
 
         TicTacToe {
             letters: _letters.clone(),
             size: _size, 
             line: _line, 
-            board: Self::initialize_board(_size), 
+            board: _board, 
             map: Self::initialize_map(&_letters, _size),
         }
-    }
-
-    fn initialize_board(_size: usize) -> Vec<Vec<Mark>> {
-        let mut _board: Vec<Vec<Mark>> = vec![];
-        for i in 0.._size {
-            _board.push(Vec::with_capacity(_size)); 
-            _board[i].extend(std::iter::repeat(Mark::Unmarked).take(_size));
-        }
-        _board
     }
 
     fn initialize_map(_letters: &Vec<char>, _size: usize) -> HashMap<char, (usize, usize)> {
