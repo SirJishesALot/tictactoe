@@ -132,6 +132,7 @@ fn main() {
             }
         }
 
+        let position = cursor::position().unwrap(); 
         loop {
             print_flush!("Would you like to play again? (y/n): ");
             let mut again_choice = String::new(); 
@@ -143,7 +144,11 @@ fn main() {
                     println!("Thanks for playing."); 
                     break 'main; // breaks out of the main loop 
                 }, 
-                _ => continue,
+                _ => {
+                    move_cursor(position);
+                    clear_line(); 
+                    continue;
+                },
             }
         }
     }
