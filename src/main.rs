@@ -38,13 +38,8 @@ fn get_grid_size() -> usize {
         std::io::stdin().read_line(&mut size_str).expect("Failed to read line."); 
 
         match size_str.trim().parse::<usize>() {
-            Ok(number) => {
-                if number < 2 || number > 7 {
-                    println!("Grid size must be within the specified bounds.");
-                } else {
-                    break number;
-                }
-            },
+            Ok(size) if size >= 2 && size <= 7 => break size, 
+            Ok(_) => println!("Grid size must be within the specified bounds."), 
             Err(_) => println!("Please enter a valid number."),
         }
     }
