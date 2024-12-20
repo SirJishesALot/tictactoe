@@ -105,7 +105,7 @@ impl TicTacToe {
             }
         }
         
-        Self::check_diagonal(self, mark.clone()) || Self::check_antidiagonal(self, mark.clone())
+        self.check_diagonal(mark.clone()) || self.check_antidiagonal(mark.clone())
     }
 
     pub fn check_valid_cell(&self, cell: char) -> bool {
